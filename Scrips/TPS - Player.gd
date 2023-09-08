@@ -12,6 +12,11 @@ class_name Player
 @onready var camera_spring_arm: SpringArm3D = $"TwistPivot/PitchPivot/Camera Spring Arm" ##Prevents camera clipping into walls
 @onready var physics_handler: PhysicsHandler = $PhysicsHandler
 
+## A gravity calculated by the [PhysicsHandler]
+@onready var gravity: float = physics_handler.gravity
+##The inital velocity to be applied when the Jump Button is hit. Calculated by the [PhysicsHandler]
+@onready var jump_velocity: float = physics_handler.jump_velocity
+
 ## Horizontal sensitivity value for mouse look 
 var mouse_hori_sensitivity:= 0.001
 ## Vertical sensitivity value for mouse look 
@@ -21,25 +26,20 @@ var joy_hori_sensitivity:= 0.05
 ## Vertical sensitivity value for stick look 
 var joy_vert_sensitivity:= 0.025
 
-
-
-## A gravity calculated by the [PhysicsHandler]
-var gravity: float
-##The inital velocity to be applied when the Jump Button is hit. Calculated by the [PhysicsHandler]
-var jump_velocity: float
-
 ## A [Vector3] representing the players input. The y value is not used but is needed for the [member Transform3D.basis] calculations to work.
 var input:= Vector3.ZERO
 
 ## A boolean value that is used for checking if the user is aiming
 var aim:= false
+
 ## A boolean value used for checking if the camera has moved to center behind the character when aiming. 
 ## Without this the camera can lock on the characters side which is obviously not ideal. 
 var view_centered:= false
+
+##A boolean value that is used to specify if the character is meant to be running
 var running:= false
 
 func _ready() -> void:
-	gravity = physics_handler.get_gravity()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _process(_delta) -> void:

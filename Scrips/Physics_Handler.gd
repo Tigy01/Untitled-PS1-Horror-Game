@@ -9,15 +9,14 @@ const walking_speed:= 3.0
 ##The amount of time in seconds it takes for the player to stop.
 @export var slow_time:= 0.15
 
-
 ##The Height in meters that the jump should peak at
-@export var JumpHeight: float = 1.35
+@export var jump_height: float = 1.35
 ##The time in seconds that it should take for the Jump to occur
-@export var JumpTime: float = 0.5
+@export var jump_time: float = 0.5
 
 ##The value that should be added to the velocity when jump is activated
-@onready var jumpVelocity:= gravity_formula(0.0)
-##The gravity that is needed for the jump to complete in the given [b]JumpTime[/b]
+@onready var jump_velocity:= gravity_formula(0.0)
+##The gravity that is needed for the jump to complete in the given [b]jump_time[/b]
 @onready var gravity = find_gravity()
 
 ##Current movement speed
@@ -34,13 +33,10 @@ func find_gravity() -> float:
 
 ##Returns the output of a formula that is used to find the value of the derivative of a perabola at a given point.
 func gravity_formula(x: float) -> float:
-	var h= JumpHeight
-	var t= JumpTime
+	var h= jump_height
+	var t= jump_time
 	var y = -1*((4.0*h)*((2.0*x)-t))/pow(t,2.0)
 	return y
-
-func get_gravity() -> float:
-	return gravity
 
 ##Calculates the change in velocity required to simulate friction. Goes from the current velocity to zero over the course of [member PhysicsHandler.slow_time]
 func get_friction(velocity:Vector3, delta: float) -> Vector3:
@@ -54,6 +50,7 @@ func get_velocity(velocity: Vector3, direction: Vector3)-> Vector3:
 	output.z = move_toward(velocity.z, direction.z * speed , acceleration)
 	return output
 
+##Increases speed based on whether the parameter [param running] == [b]true[/b]
 func change_speed(running:bool) -> float:
 	if running:
 		speed = move_toward(speed, running_speed, acceleration)

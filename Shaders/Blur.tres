@@ -33,6 +33,8 @@ default_value = 1.0
 
 [resource]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform float Blur : hint_range(0, 2.5) = 0;
 uniform sampler2D Screen : filter_linear_mipmap, hint_screen_texture;
 uniform float Brightness2 : hint_range(0, 1) = 1;
