@@ -20,8 +20,8 @@ func _ready():
 ## [param look] is a float that sets how much the player should look up or down and ranges from [b]-1[/b] to [b]1[/b]. [br]
 ## [param on_floor] is passed in from the [method CharacterBody3D.is_on_floor] method.
 ## [member Player.input]
-func update(input, aim: bool, look: float, on_floor: bool, running: bool): 
-	set('parameters/Weaponless/Jump/blend_amount', move_toward(get('parameters/Weaponless/Jump/blend_amount'), not on_floor, .05)) #modifies the jump animation's effect
+func update(input, aim: bool, look: float, on_floor: bool, running: bool, delta: float): 
+	set('parameters/Weaponless/Jump/blend_amount', move_toward(get('parameters/Weaponless/Jump/blend_amount'), not on_floor, 3* delta)) #modifies the jump animation's effect
 	if input:
 		move_state= move_toward(move_state, running, .1) #if walking 
 	else:

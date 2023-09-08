@@ -42,8 +42,8 @@ var running:= false
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _process(_delta) -> void:
-	animate.update(input, aim, clamp(((rad_to_deg(pitch_pivot.rotation.x))/45), -1, 1), is_on_floor(), running)
+func _process(delta) -> void:
+	animate.update(input, aim, clamp(((rad_to_deg(pitch_pivot.rotation.x))/45), -1, 1), is_on_floor(), running, delta)
 	aim_handler()
 
 func _physics_process(delta: float) -> void:
