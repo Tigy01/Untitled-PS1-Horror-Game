@@ -58,6 +58,7 @@ func _physics_process(delta: float) -> void:
 		twist_pivot.rotate_y(-axis_vector.x * joy_hori_sensitivity) #twist_pivot.
 		pitch_pivot.rotate_x(axis_vector.y * joy_vert_sensitivity) #pitch_pivot.
 		pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, deg_to_rad(-60), deg_to_rad(30))
+	move_and_slide()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -94,7 +95,8 @@ func movement(delta) -> void:
 		velocity.y -= gravity * delta
 	elif Input.is_action_just_pressed("jump") and is_on_floor()  : # applies intial jump velocity.
 		velocity.y = 10
-	move_and_slide()
+	
+	return velocity
 
 ## Handles modifying the player's camera based on whether the aim input is active.
 func aim_handler() -> void:
