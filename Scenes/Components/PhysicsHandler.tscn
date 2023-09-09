@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Scrips/Physics_Handler.gd" id="1_0sfes"]
 
-[node name="PhysicsHandler" type="Node2D"]
+[node name="PhysicsHandler" type="Node"]
 script = ExtResource("1_0sfes")

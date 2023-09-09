@@ -22,13 +22,11 @@ const walking_speed:= 3.0
 ##Current movement speed
 var speed:= 3.0
 
-##finds the slope between x= 0 and x=1 for the gravity formula AKA the derivative of the gravity formula
+##finds the derivative(slope) of the gravity formula by sampling two points
 func find_gravity() -> float:
-	var x1: float =0.0
-	var x2: float = 1.0
-	var y1: float = gravity_formula(x1)
-	var y2: float = gravity_formula(x2)
-	var slope = (y2-y1)/(x2-x1)
+	var y1: float = gravity_formula(0)
+	var y2: float = gravity_formula(1)
+	var slope = (y2-y1)
 	return slope
 
 ##Returns the output of a formula that is used to find the value of the derivative of a perabola at a given point.
@@ -40,7 +38,10 @@ func gravity_formula(x: float) -> float:
 
 ##Calculates the change in velocity required to simulate friction. Goes from the current velocity to zero over the course of [member PhysicsHandler.slow_time]
 func get_friction(velocity:Vector3, delta: float) -> Vector3:
-	var output = Vector3(move_toward(velocity.x, 0, abs((velocity.x/slow_time)* delta)), velocity.y, move_toward(velocity.z, 0, abs((velocity.z/slow_time)* delta)))
+	var output: Vector3
+	output.x = move_toward(velocity.x, 0, abs((velocity.x/slow_time)* delta)) 
+	output.y = velocity.y 
+	output.z = move_toward(velocity.z, 0, abs((velocity.z/slow_time)* delta))
 	return output
 
 ##Calculates the change in velocity required to simulate accelerating to a predefined speed.

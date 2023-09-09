@@ -20,12 +20,11 @@ func _ready():
 ## [param look] is a float that sets how much the player should look up or down and ranges from [b]-1[/b] to [b]1[/b]. [br]
 ## [param on_floor] is passed in from the [method CharacterBody3D.is_on_floor] method.
 ## [member Player.input]
-func update(input, aim: bool, look: float, on_floor: bool, running: bool, delta: float): 
-	set('parameters/Weaponless/Jump/blend_amount', move_toward(get('parameters/Weaponless/Jump/blend_amount'), not on_floor, 3* delta)) #modifies the jump animation's effect
-	if input:
-		move_state= move_toward(move_state, running, .1) #if walking 
-	else:
-		move_state = move_toward(move_state, -1.0, .1)
+func update(input, aim: bool, look: float, on_floor: bool, delta: float): 
+	#modifies the jump animation's effect based on whether it is on the floor
+	
+	set('parameters/Weaponless/Jump/blend_amount', move_toward(get('parameters/Weaponless/Jump/blend_amount'), not on_floor, 5* delta)) 
+	
 	
 	match equipped_weapon: ##
 		'none':
@@ -47,6 +46,12 @@ func swap_weapon(weapon):
 		'rifle':
 			top_state.travel('Weapon')
 			weapon_state.travel('Rifle')
+
+func update_move_state(input, running: bool):
+	if input:
+		move_state= move_toward(move_state, running, .1) #if walking 
+	else:
+		move_state = move_toward(move_state, -1.0, .1)
 
 ##Requests the [b]Shoot[/b] OneShot to play
 func shoot():
