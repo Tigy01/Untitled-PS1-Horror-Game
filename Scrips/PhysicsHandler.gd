@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name PhysicsHandler
 ##A special component meant to do physics calculations on request.
 
