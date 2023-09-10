@@ -19,11 +19,11 @@ var running:= false ##A boolean value that is used to specify if the character i
 var direction: Vector3 ##Is used to define a vector that is the direction in front of the camera.
 
 func _process(delta) -> void:
-	animation_handler.update(input, camera_handler.aiming, clamp(((rad_to_deg(pitch_pivot.rotation.x))/45), -1, 1), is_on_floor(), delta)
+	animation_handler.update(input, clamp(((rad_to_deg(pitch_pivot.rotation.x))/45), -1, 1), is_on_floor())
 	animation_handler.update_move_state(input, running)
 	camera_handler.update()
 	
-	if camera_handler.aiming: ##Has to be run in the player's script to avoid useless errors. Works with or without
+	if not camera_handler.aiming: ##Has to be run in the player's script to avoid useless errors. Works with or without
 		if camera_handler.view_centered:
 			visuals.rotation.y = twist_pivot.rotation.y + PI
 			pass
@@ -53,17 +53,18 @@ func movement(delta) -> void:
 			visuals.transform = visuals.transform.interpolate_with(align, delta * 10.0)
 	elif is_on_floor(): #Is only active when player input stops
 		velocity = physics_handler.get_friction(velocity, delta)
-	
-	if not is_on_floor(): # applies gravity
+	if not is_on_floor(): # applies gravity reguardless of player input
 		velocity.y += gravity * delta
-	elif Input.is_action_just_pressed("jump") and is_on_floor()  : # applies intial jump velocity.
+	elif Input.is_action_just_pressed("jump") and is_on_floor(): # applies intial jump velocity.
 		velocity.y = jump_velocity
 		animation_handler.swap_weapon('none')
 
 ##Preforms a series of checks to see if shooting should occur.
 func gun_behavior():
-	if Input.is_action_just_pressed('shoot') and camera_handler.aiming:
-		animation_handler.shoot()
-		if aim_ray.is_colliding(): #Remember! aimray is on layer 2.
-			var target = aim_ray.get_collider()
-			target.queue_free()
+	if not Input.is_action_just_pressed('shoot') and not camera_handler.aiming:
+		return
+	
+	animation_handler.shoot()
+	if aim_ray.is_colliding(): #Remember! aimray is on layer 2.
+		var target = aim_ray.get_collider()
+		target.queue_free()
