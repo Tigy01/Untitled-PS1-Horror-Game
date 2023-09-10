@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7wyhquyj1tgm"]
+
+[ext_resource type="Script" path="res://Scrips/CameraHandler.gd" id="1_gfqar"]
+
+[node name="CameraHandler" type="Node3D"]
+script = ExtResource("1_gfqar")
+
+[node name="TwistPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00336498, 1.345, 0.000226736)
+
+[node name="PitchPivot" type="Node3D" parent="TwistPivot"]
+
+[node name="Camera Spring Arm" type="SpringArm3D" parent="TwistPivot/PitchPivot"]
+transform = Transform3D(0.816138, 0, 0.577858, 0, 1, 0, -0.577858, 0, 0.816138, 2.32831e-10, 0, 7.27596e-11)
+
+[node name="Camera3D" type="Camera3D" parent="TwistPivot/PitchPivot/Camera Spring Arm"]
+transform = Transform3D(0.816137, 0, -0.577857, 0, 1, 0, 0.577857, 0, 0.816137, 3.86499e-08, 0, 1)

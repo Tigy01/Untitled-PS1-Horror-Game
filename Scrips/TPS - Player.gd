@@ -4,12 +4,12 @@ class_name Player
 ##
 ## This is not meant to actually singal changes to the animator node, rather it should signal changes to the Player animation controller.
 @onready var animation_handler: AnimationHandler = $Visuals/AnimationHandler
-@onready var camera_handler: CameraHandler = $CameraHandler
+@onready var camera_handler: CameraHandler = $TPSCameraHandler
 @onready var physics_handler: PhysicsHandler = $PhysicsHandler
 
-@onready var aim_ray: RayCast3D = $"CameraHandler/TwistPivot/PitchPivot/Camera Spring Arm/Camera3D/AimRay" ##The raycast used for hitscan weapons
-@onready var twist_pivot: Node3D = $CameraHandler/TwistPivot ##A node that is used to rotate the Camera [i]horizontally[/i] around a point
-@onready var pitch_pivot: Node3D = $CameraHandler/TwistPivot/PitchPivot ##A node that is used to rotate the Camera [i]vertically[/i] around a point
+@onready var aim_ray: RayCast3D = $"TPSCameraHandler/TwistPivot/PitchPivot/Camera Spring Arm/Camera3D/AimRay" ##The raycast used for hitscan weapons
+@onready var twist_pivot: Node3D = $TPSCameraHandler/TwistPivot ##A node that is used to rotate the Camera [i]horizontally[/i] around a point
+@onready var pitch_pivot: Node3D = $TPSCameraHandler/TwistPivot/PitchPivot ##A node that is used to rotate the Camera [i]vertically[/i] around a point
 @onready var visuals: Node3D = $Visuals
 
 @onready var gravity: float = physics_handler.gravity ## A gravity calculated by the [PhysicsHandler]
@@ -21,15 +21,13 @@ var direction: Vector3 ##Is used to define a vector that is the direction in fro
 func _process(delta) -> void:
 	animation_handler.update(input, clamp(((rad_to_deg(pitch_pivot.rotation.x))/45), -1, 1), is_on_floor())
 	animation_handler.update_move_state(input, running)
-	camera_handler.update()
+	camera_handler.aim_controls()
 	
-	if not camera_handler.aiming: ##Has to be run in the player's script to avoid useless errors. Works with or without
-		if camera_handler.view_centered:
-			visuals.rotation.y = twist_pivot.rotation.y + PI
-			pass
-		else:
-			twist_pivot.rotation.y = lerp_angle(twist_pivot.rotation.y, visuals.rotation.y + PI, 0.1) #centers the camera's y rotation to be behind the visuals
-			pitch_pivot.rotation.x = lerp_angle(pitch_pivot.rotation.x, 0, 0.15)
+	if camera_handler.aiming and camera_handler.view_centered: ##Has to be run in the player's script to avoid useless errors. Works with or without
+		visuals.rotation.y = twist_pivot.rotation.y + PI
+	elif camera_handler.view_centered:
+		twist_pivot.rotation.y = lerp_angle(twist_pivot.rotation.y, visuals.rotation.y + PI, 0.1) #centers the camera's y rotation to be behind the visuals
+		pitch_pivot.rotation.x = lerp_angle(pitch_pivot.rotation.x, 0, 0.15)
 
 func _physics_process(delta) -> void:
 	gun_behavior()
@@ -61,7 +59,7 @@ func movement(delta) -> void:
 
 ##Preforms a series of checks to see if shooting should occur.
 func gun_behavior():
-	if not Input.is_action_just_pressed('shoot') and not camera_handler.aiming:
+	if not Input.is_action_just_pressed('shoot') or not camera_handler.aiming:
 		return
 	
 	animation_handler.shoot()

@@ -1,13 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bty60eyd3b3a1"]
+[gd_scene load_steps=4 format=3 uid="uid://bty60eyd3b3a1"]
 
 [ext_resource type="PackedScene" uid="uid://cdmwfbi1tjou2" path="res://Scenes/PreFabs/TPS - Player - Character.tscn" id="1_77i4g"]
 [ext_resource type="Material" uid="uid://d36o6j7wogjh1" path="res://Assets/Blockout/Blockout.material" id="1_kcv14"]
 [ext_resource type="PackedScene" uid="uid://bp5icec5c2u0h" path="res://Scenes/PreFabs/Light Orb.tscn" id="2_ayfhf"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_61y8f"]
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cnfga"]
-points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
 
 [node name="Node3D" type="Node3D"]
 
@@ -430,76 +425,4 @@ operation = 2
 size = Vector3(1, 2, 2)
 
 [node name="TPS Player" parent="." instance=ExtResource("1_77i4g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0626, 1, -2.33732)
-
-[node name="PhysicsHandler" parent="TPS Player" index="1"]
-jump_time = 0.65
-
-[node name="Skeleton3D" parent="TPS Player/Visuals/Character with gun/Armature" index="0"]
-bones/0/position = Vector3(0.418465, 1.50991, -101.608)
-bones/0/rotation = Quaternion(-0.708299, -0.0238756, -0.0426831, 0.704216)
-bones/1/rotation = Quaternion(-0.0702435, -0.0129462, 0.0256325, 0.997116)
-bones/2/rotation = Quaternion(0.00489535, -0.00593887, 0.0516121, 0.998638)
-bones/3/rotation = Quaternion(0.0178197, -0.000532059, 0.051528, 0.998512)
-bones/4/rotation = Quaternion(0.00911002, -0.000185326, -0.0190729, 0.999777)
-bones/5/rotation = Quaternion(0.0123941, 0.0145083, -0.0707065, 0.997315)
-bones/7/rotation = Quaternion(-0.534521, 0.565111, -0.506407, -0.372141)
-bones/8/rotation = Quaternion(0.540909, -0.0515827, -0.0987835, 0.833666)
-bones/9/rotation = Quaternion(-1.16117e-07, -1.2008e-07, -0.154262, 0.98803)
-bones/10/rotation = Quaternion(0.0950681, 0.105, 0.0700161, 0.987438)
-bones/11/rotation = Quaternion(0.198266, -0.115748, -0.204774, 0.951504)
-bones/12/rotation = Quaternion(-0.0410084, 0.132341, 0.242135, 0.960299)
-bones/13/rotation = Quaternion(-0.00116196, 0.0222901, 0.0684194, 0.997407)
-bones/15/rotation = Quaternion(0.0695838, -0.000119967, 0.0409995, 0.996733)
-bones/16/rotation = Quaternion(0.179712, 0.00108557, 0.0249799, 0.983401)
-bones/17/rotation = Quaternion(0.121883, 0.00191476, 0.00181147, 0.992541)
-bones/19/rotation = Quaternion(0.138059, 0.00270812, 0.0769406, 0.987427)
-bones/20/rotation = Quaternion(0.288219, 0.00234115, 0.0357857, 0.956893)
-bones/21/rotation = Quaternion(0.139603, 0.000168278, 0.0149928, 0.990094)
-bones/23/rotation = Quaternion(0.225359, 0.00203504, 0.103664, 0.968743)
-bones/24/rotation = Quaternion(0.339332, -0.00232689, 0.0366043, 0.939951)
-bones/25/rotation = Quaternion(0.150925, 0.00128928, -0.000918335, 0.988544)
-bones/27/rotation = Quaternion(0.303185, -0.00202282, 0.146945, 0.941532)
-bones/28/rotation = Quaternion(0.383545, 0.00269084, 0.037084, 0.922773)
-bones/29/rotation = Quaternion(0.187969, 0.00654026, 0.000490385, 0.982153)
-bones/34/rotation = Quaternion(0.582083, 0.51761, -0.465136, 0.420604)
-bones/35/rotation = Quaternion(0.653656, 0.0736814, 0.0302596, 0.752588)
-bones/37/rotation = Quaternion(0.0885776, -0.240628, -0.0105895, 0.966509)
-bones/38/rotation = Quaternion(0.198243, 0.11586, 0.204805, 0.951489)
-bones/39/rotation = Quaternion(-0.0409816, -0.132465, -0.242152, 0.960279)
-bones/40/rotation = Quaternion(-0.00838831, -0.0216314, -0.0756626, 0.996864)
-bones/42/rotation = Quaternion(0.0695834, 0.000119803, -0.0409987, 0.996733)
-bones/43/rotation = Quaternion(0.179718, -0.00108536, -0.0249785, 0.9834)
-bones/44/rotation = Quaternion(0.0899865, -0.000333593, -0.00726468, 0.995916)
-bones/46/rotation = Quaternion(0.138079, -0.00270918, -0.076942, 0.987424)
-bones/47/rotation = Quaternion(0.288224, -0.00234104, -0.0357837, 0.956891)
-bones/48/rotation = Quaternion(0.108149, 9.21866e-05, -0.0132128, 0.994047)
-bones/50/rotation = Quaternion(0.225345, -0.00203529, -0.103661, 0.968746)
-bones/51/rotation = Quaternion(0.339325, 0.00232656, -0.0366009, 0.939954)
-bones/52/rotation = Quaternion(0.163977, 0.00195754, -0.0161946, 0.986329)
-bones/54/rotation = Quaternion(0.303174, 0.0020239, -0.146942, 0.941536)
-bones/55/rotation = Quaternion(0.383542, -0.00269125, -0.0370819, 0.922775)
-bones/56/rotation = Quaternion(0.174098, -0.000254206, -0.0248684, 0.984414)
-bones/58/rotation = Quaternion(-0.0412041, 0.0246544, 0.994292, -0.0952808)
-bones/59/rotation = Quaternion(-0.14091, 0.0465369, 0.0250254, 0.988611)
-bones/60/rotation = Quaternion(0.53298, -0.0307526, -0.0634854, 0.843182)
-bones/63/rotation = Quaternion(0.114731, 0.17311, 0.970369, -0.123507)
-bones/64/rotation = Quaternion(-0.249006, -0.0775432, 0.03494, 0.96476)
-bones/65/rotation = Quaternion(0.485729, -0.0638781, -0.078628, 0.868219)
-
-[node name="Gun" parent="TPS Player/Visuals/Character with gun/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, -18.6483, -0.846491, -82.5698)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.19652, -0.762667)
-collision_layer = 3
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("CapsuleMesh_61y8f")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("ConvexPolygonShape3D_cnfga")
-
-[editable path="TPS Player"]
-[editable path="TPS Player/UI/PauseMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680101, 3.3684, -1.37586)
