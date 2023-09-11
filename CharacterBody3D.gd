@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction := (twist_pivot.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity = physics_handler.get_velocity(velocity, direction)
+		velocity = physics_handler.apply_acceleration(velocity, direction)
 		var align = visuals.transform.looking_at(direction - visuals.transform.origin) #Custom
 		visuals.transform = visuals.transform.interpolate_with(align, delta * 10.0) #Custom
 	else:

@@ -2,8 +2,6 @@ extends Node3D
 class_name PhysicsHandler
 ##A special component meant to do physics calculations on request.
 
-
-
 @export_range(0.05, 100, 0.5, "suffix:m/s") var walking_speed:= 3.0 ##Normal speed if running is not actively occuring
 @export_range(0.05, 100, 0.5, "suffix:m/s") var running_speed:= 5.0 ##If running is set up this is the run speed
 @export_range(0.05, 10, 0.005, "suffix:s") var speed_up_time:= 0.0##The amount of time in seconds it takes for the player to stop.
@@ -15,6 +13,7 @@ class_name PhysicsHandler
 @onready var gravity = -1 * find_slope(gravity_formula)##The gravity that is needed for the jump to complete in the given [b]jump_time[/b]
 
 var acceleration:= Vector3.ZERO
+var place_holder:= 0.5
 var friction:= Vector3.ZERO
 var speed:= 3.0 ##Current movement speed
 var recalculate_friction:= true
@@ -28,8 +27,6 @@ func find_slope(my_func: Callable) -> float:
 
 ##Returns the output of a formula that is used to find the value of the derivative of a perabola at a given point.
 func gravity_formula(x: float) -> float: 
-	var h= jump_height
-	var t= jump_time
 	var y = -1*((4.0*jump_height)*((2.0*x)-jump_time))/pow(jump_time,2.0)
 	return y
 
@@ -41,10 +38,11 @@ func apply_friction(velocity:Vector3, delta: float) -> Vector3:
 	if recalculate_friction:
 		get_friction(velocity)
 		recalculate_friction = false
-	var output: Vector3
+	var output:= Vector3.ZERO
 	output.x = move_toward(velocity.x, 0, abs((friction.x)* delta)) 
 	output.y = velocity.y 
 	output.z = move_toward(velocity.z, 0, abs((friction.z)* delta))
+	print(friction)
 	return output
 
 ##Calculates the change in velocity required to simulate friction using [member PhysicsHandler.slow_time]. Should be calculated when input is first released otherwise velocity just approaches zero.
@@ -56,7 +54,9 @@ func get_friction(velocity_at_release:Vector3):
 	friction.z = -1*velocity_at_release.z/scaled_slow_time
 
 func get_acceleration(velocity: Vector3):
-	var output:Vector3
+	if Input.is_action_just_released("run"): ##Helps avoid sliding but which I do not fully understand
+		get_friction(velocity)
+	var output:= Vector3.ZERO
 	output.x = speed-velocity.x/speed_up_time
 	output.z = speed-velocity.z/speed_up_time
 	return output
@@ -64,8 +64,8 @@ func get_acceleration(velocity: Vector3):
 ##Calculates the change in velocity required to simulate accelerating to a predefined speed.
 func apply_acceleration(velocity: Vector3, direction: Vector3)-> Vector3:
 	var output:=velocity
-	output.x = move_toward(velocity.x, direction.x * speed , acceleration.x)
-	output.z = move_toward(velocity.z, direction.z * speed , acceleration.z)
+	output.x = move_toward(velocity.x, direction.x * speed , place_holder)
+	output.z = move_toward(velocity.z, direction.z * speed , place_holder)
 	return output
 
 ##Increases speed based on whether the parameter [param running] == [b]true[/b]

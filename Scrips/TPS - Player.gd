@@ -18,7 +18,7 @@ var input:= Vector3.ZERO ## A [Vector3] representing the players input. The y va
 var running:= false ##A boolean value that is used to specify if the character is meant to be running
 var direction: Vector3 ##Is used to define a vector that is the direction in front of the camera.
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	animation_handler.update(input, clamp(((rad_to_deg(pitch_pivot.rotation.x))/45), -1, 1), is_on_floor())
 	animation_handler.update_move_state(input, running)
 	camera_handler.aim_controls()
@@ -28,6 +28,7 @@ func _process(delta) -> void:
 	elif camera_handler.view_centered:
 		twist_pivot.rotation.y = lerp_angle(twist_pivot.rotation.y, visuals.rotation.y + PI, 0.1) #centers the camera's y rotation to be behind the visuals
 		pitch_pivot.rotation.x = lerp_angle(pitch_pivot.rotation.x, 0, 0.15)
+
 func _physics_process(delta) -> void:
 	gun_behavior()
 	movement(delta)
@@ -41,7 +42,7 @@ func movement(delta) -> void:
 		running = Input.is_action_pressed("run")
 		physics_handler.change_speed(running)
 		direction = (twist_pivot.basis * input).normalized() 
-		velocity = physics_handler.get_velocity(velocity, direction)
+		velocity = physics_handler.apply_acceleration(velocity, direction)
 		if !camera_handler.aiming: #Handles rotation of the model when appropriate
 			var align = visuals.transform.looking_at(visuals.transform.origin - direction)
 			visuals.transform = visuals.transform.interpolate_with(align, delta * 10.0)
@@ -52,7 +53,7 @@ func movement(delta) -> void:
 		velocity.y -= gravity * delta
 	elif Input.is_action_just_pressed("jump") and is_on_floor(): # applies intial jump velocity.
 		velocity.y = jump_velocity
-		animation_handler.swap_weapon('none')
+		animation_handler.swap_weapon('none')	
 	if running: # unlockes the camera, signals the animation controller to play the run animation and change the weapon state to none, and modifies movement speed. 
 		camera_handler.aiming = false
 		animation_handler.swap_weapon('none')
@@ -61,7 +62,6 @@ func movement(delta) -> void:
 func gun_behavior():
 	if not Input.is_action_just_pressed('shoot') or not camera_handler.aiming:
 		return
-	
 	animation_handler.shoot()
 	if aim_ray.is_colliding(): #Remember! aimray is on layer 2.
 		var target = aim_ray.get_collider()
