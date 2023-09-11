@@ -7,8 +7,8 @@ class_name CameraHandler
 @onready var camera_spring_arm: SpringArm3D = $"TwistPivot/PitchPivot/Camera Spring Arm" ##Prevents camera clipping into walls
 @onready var camera: Camera3D =$"TwistPivot/PitchPivot/Camera Spring Arm/Camera3D"
 
-@export var camera_distance:= 1.0
-@export_range(0, 360, 0.5) var camera_angle:= 35.3
+@export_range(0, 15, 0.5, "suffix:m") var camera_distance:= 1.0
+@export_range(0, 360, 0.5, "suffix:°") var camera_angle:= 35.3
 
 var joy_hori_sensitivity:= 0.05  ## Horizontal sensitivity value for stick look 
 var joy_vert_sensitivity:= 0.025 ## Vertical sensitivity value for stick look 
@@ -16,7 +16,8 @@ var mouse_hori_sensitivity:= 0.001 ## Horizontal sensitivity value for mouse loo
 var mouse_vert_sensitivity:= 0.001 ## Vertical sensitivity value for mouse look
 
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if not Engine.is_editor_hint():
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	set_initial_position()
 
 func _input(event: InputEvent) -> void:

@@ -4,7 +4,7 @@ class_name PhysicsHandler
 
 @export_range(0.05, 100, 0.5, "suffix:m/s") var walking_speed:= 3.0 ##Normal speed if running is not actively occuring
 @export_range(0.05, 100, 0.5, "suffix:m/s") var running_speed:= 5.0 ##If running is set up this is the run speed
-@export_range(0.05, 10, 0.005, "suffix:s") var speed_up_time:= 0.0##The amount of time in seconds it takes for the player to stop.
+@export_range(0.05, 10, 0.005, "suffix:s") var speed_up_time:= 0.5##The amount of time in seconds it takes for the player to stop.
 @export_range(0.05, 10, 0.005, "suffix:s") var slow_time:= 0.125 ##The amount of time in seconds it takes for the player to stop.
 @export_range(0.05, 10, 0.005, "suffix:s") var jump_time: float = 0.6 ##The time in seconds that it should take for the Jump to occur
 @export_range(0.05, 30, 0.05, "suffix:m") var jump_height: float = 1.45 ##The Height in meters that the jump should peak at
@@ -30,48 +30,32 @@ func gravity_formula(x: float) -> float:
 	var y = -1*((4.0*jump_height)*((2.0*x)-jump_time))/pow(jump_time,2.0)
 	return y
 
-##Changes Velocity gradually
-func apply_friction(velocity:Vector3, delta: float) -> Vector3:
-	if velocity.length()==0:
-		recalculate_friction= true
-		return Vector3.ZERO
-	if recalculate_friction:
-		get_friction(velocity)
-		recalculate_friction = false
-	var output:= Vector3.ZERO
-	output.x = move_toward(velocity.x, 0, abs((friction.x)* delta)) 
-	output.y = velocity.y 
-	output.z = move_toward(velocity.z, 0, abs((friction.z)* delta))
-	print(friction)
-	return output
-
 ##Calculates the change in velocity required to simulate friction using [member PhysicsHandler.slow_time]. Should be calculated when input is first released otherwise velocity just approaches zero.
 func get_friction(velocity_at_release:Vector3):
 	var scaled_slow_time = slow_time
 	if velocity_at_release.length() > walking_speed:
-		scaled_slow_time = slow_time * running_speed/walking_speed
-	friction.x = -1*velocity_at_release.x/scaled_slow_time
-	friction.z = -1*velocity_at_release.z/scaled_slow_time
+		scaled_slow_time = slow_time * running_speed/walking_speed 
+	friction.x = abs((-1*velocity_at_release.x)/scaled_slow_time)
+	friction.z = abs((-1*velocity_at_release.z)/scaled_slow_time)
 
-func get_acceleration(velocity: Vector3):
-	if Input.is_action_just_released("run"): ##Helps avoid sliding but which I do not fully understand
-		get_friction(velocity)
-	var output:= Vector3.ZERO
-	output.x = speed-velocity.x/speed_up_time
-	output.z = speed-velocity.z/speed_up_time
+##Changes Velocity gradually
+func apply_friction(velocity:Vector3, delta: float) -> Vector3:
+	var output:= velocity
+	output.x = move_toward(velocity.x, 0, friction.x* delta) 
+	output.z = move_toward(velocity.z, 0, friction.z* delta)
 	return output
 
 ##Calculates the change in velocity required to simulate accelerating to a predefined speed.
-func apply_acceleration(velocity: Vector3, direction: Vector3)-> Vector3:
+func apply_acceleration(velocity: Vector3, direction: Vector3, delta:float)-> Vector3:
 	var output:=velocity
-	output.x = move_toward(velocity.x, direction.x * speed , place_holder)
-	output.z = move_toward(velocity.z, direction.z * speed , place_holder)
+	output.x = move_toward(velocity.x, direction.x * speed , speed*delta/speed_up_time)
+	output.z = move_toward(velocity.z, direction.z * speed , speed*delta/speed_up_time)
+	get_friction(velocity)
 	return output
 
 ##Increases speed based on whether the parameter [param running] == [b]true[/b]
-func change_speed(running:bool) -> float:
+func change_speed(running:bool) -> void:
 	if running:
 		speed = move_toward(speed, running_speed, 0.5)
 	else:
 		speed = move_toward(speed, walking_speed, 0.1)
-	return speed

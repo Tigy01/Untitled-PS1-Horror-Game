@@ -1,17 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bty60eyd3b3a1"]
+[gd_scene load_steps=4 format=3 uid="uid://bty60eyd3b3a1"]
 
-[ext_resource type="PackedScene" uid="uid://cdmwfbi1tjou2" path="res://Scenes/PreFabs/TPS - Player - Character.tscn" id="1_77i4g"]
 [ext_resource type="Material" uid="uid://d36o6j7wogjh1" path="res://Assets/Blockout/Blockout.material" id="1_kcv14"]
 [ext_resource type="PackedScene" uid="uid://bp5icec5c2u0h" path="res://Scenes/PreFabs/Light Orb.tscn" id="2_ayfhf"]
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wmn3d"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_rvita"]
+[ext_resource type="PackedScene" uid="uid://cdmwfbi1tjou2" path="res://Scenes/PreFabs/TPS - Player - Character.tscn" id="3_x4cvm"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Blockouts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.06225, 2.14476)
 
 [node name="Player Room" type="CSGBox3D" parent="Blockouts"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.24928, 4, -2.66187)
@@ -429,16 +425,5 @@ transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, -7.43929
 operation = 2
 size = Vector3(1, 2, 2)
 
-[node name="TPS Player" parent="." instance=ExtResource("1_77i4g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680101, 2.44413, -1.37586)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26394, 2.44413, -6.42002)
-collision_layer = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_wmn3d")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_rvita")
-skeleton = NodePath("../../TPS Player/TPSCameraHandler")
+[node name="TPS Player" parent="." instance=ExtResource("3_x4cvm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.84827, 7.07367, 0.000226736)

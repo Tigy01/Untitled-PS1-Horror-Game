@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dmjigrr7kb5py"]
+[gd_scene load_steps=20 format=3 uid="uid://dmjigrr7kb5py"]
 
 [ext_resource type="Texture2D" uid="uid://xls1b28dyfv1" path="res://addons/kenney_prototype_textures/orange/texture_05.png" id="1_b1g7s"]
 [ext_resource type="Material" uid="uid://d36o6j7wogjh1" path="res://Assets/Blockout/Blockout.material" id="1_ojcre"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://CharacterBody3D.gd" id="5_xhbmy"]
 [ext_resource type="PackedScene" uid="uid://b7wyhquyj1tgm" path="res://Scenes/Components/camera_handler.tscn" id="6_ax47j"]
 [ext_resource type="PackedScene" uid="uid://pohxs0pewumc" path="res://Scenes/Components/PhysicsHandler.tscn" id="7_4ycch"]
+[ext_resource type="PackedScene" uid="uid://bv66jk8iuj48l" path="res://Scenes/UI/Pause Menu.tscn" id="8_optt7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_plw42"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -141,3 +142,5 @@ camera_distance = 1.65
 
 [node name="PhysicsHandler" parent="CharacterBody3D" instance=ExtResource("7_4ycch")]
 transform = Transform3D(0.999678, 0.0235706, -0.00940464, -0.0235457, 0.999719, 0.00274619, 0.00946673, -0.00252384, 0.999952, 0, 0, 0)
+
+[node name="PauseMenu" parent="CharacterBody3D" instance=ExtResource("8_optt7")]
