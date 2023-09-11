@@ -2,23 +2,22 @@ extends Node3D
 class_name PhysicsHandler
 ##A special component meant to do physics calculations on request.
 
-const acceleration:= 0.5
-const running_speed:= 5.0
-const walking_speed:= 3.0
 
-##The amount of time in seconds it takes for the player to stop.
-@export var slow_time:= 0.125
 
-##The Height in meters that the jump should peak at
-@export var jump_height: float = 1.45
-##The time in seconds that it should take for the Jump to occur
-@export var jump_time: float = 0.6
+@export var walking_speed:= 3.0 ##Normal speed if running is not actively occuring
+@export var running_speed:= 5.0 ##If running is set up this is the run speed
+@export var speed_up_time:= 0.0
+@export_range(0.05, 10, 0.005, "suffix:s") var slow_time:= 0.125 ##The amount of time in seconds it takes for the player to stop.
+@export var jump_time: float = 0.6 ##The time in seconds that it should take for the Jump to occur
+@export var jump_height: float = 1.45 ##The Height in meters that the jump should peak at
 
 ##The value that should be added to the velocity when jump is activated
 @onready var jump_velocity:= gravity_formula(0.0)
 ##The gravity that is needed for the jump to complete in the given [b]jump_time[/b]
-@onready var gravity = find_slope(gravity_formula)
+@onready var gravity = -1 * find_slope(gravity_formula)
 
+var acceleration:= 0.5
+var friction:= 0.0
 ##Current movement speed
 var speed:= 3.0
 
@@ -33,15 +32,26 @@ func find_slope(my_func: Callable) -> float:
 func gravity_formula(x: float) -> float: 
 	var h= jump_height
 	var t= jump_time
-	var y = -1*((4.0*h)*((2.0*x)-t))/pow(t,2.0)
+	var y = -1*((4.0*jump_height)*((2.0*x)-jump_time))/pow(jump_time,2.0)
 	return y
 
-##Calculates the change in velocity required to simulate friction. Goes from the current velocity to zero over the course of [member PhysicsHandler.slow_time]
-func get_friction(velocity:Vector3, delta: float) -> Vector3:
-	var output:= Vector3.ZERO
-	output.x = move_toward(velocity.x, 0, abs((velocity.x/slow_time)* delta)) 
+##Changes Velocity gradually
+func apply_friction(velocity:Vector3, delta: float):
+	var output: Vector3
+	output.x = move_toward(velocity.x, 0, abs((friction)* delta)) 
 	output.y = velocity.y 
-	output.z = move_toward(velocity.z, 0, abs((velocity.z/slow_time)* delta))
+	output.z = move_toward(velocity.z, 0, abs((friction)* delta))
+	return output
+
+##Calculates the change in velocity required to simulate friction using [member PhysicsHandler.slow_time]. Should be calculated when input is first released otherwise velocity just approaches zero.
+func get_friction(velocity_at_release:Vector3) -> Vector3:
+	var output:Vector3
+	output.x = -1*velocity_at_release.x/slow_time
+	output.z = -1*velocity_at_release.z/slow_time
+	return output
+
+func get_acceleration(velocity):
+	var output:Vector3 = speed-velocity/speed_up_time
 	return output
 
 ##Calculates the change in velocity required to simulate accelerating to a predefined speed.

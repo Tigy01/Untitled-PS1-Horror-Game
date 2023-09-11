@@ -44,15 +44,16 @@ func movement(delta) -> void:
 	if input:
 		running = Input.is_action_pressed("run")
 		physics_handler.change_speed(running)
-		direction = twist_pivot.basis * input.normalized() 
+		direction = (twist_pivot.basis * input).normalized() 
 		velocity = physics_handler.get_velocity(velocity, direction)
 		if !camera_handler.aiming: #Handles rotation of the model when appropriate
 			var align = visuals.transform.looking_at(visuals.transform.origin - direction)
 			visuals.transform = visuals.transform.interpolate_with(align, delta * 10.0)
 	elif is_on_floor(): #Is only active when player input stops
 		velocity = physics_handler.get_friction(velocity, delta)
+	
 	if not is_on_floor(): # applies gravity reguardless of player input
-		velocity.y += gravity * delta
+		velocity.y -= gravity * delta
 	elif Input.is_action_just_pressed("jump") and is_on_floor(): # applies intial jump velocity.
 		velocity.y = jump_velocity
 		animation_handler.swap_weapon('none')

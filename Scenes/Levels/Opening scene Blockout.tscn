@@ -425,4 +425,4 @@ operation = 2
 size = Vector3(1, 2, 2)
 
 [node name="TPS Player" parent="." instance=ExtResource("1_77i4g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680101, 3.3684, -1.37586)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680101, 3.14942, -1.37586)
