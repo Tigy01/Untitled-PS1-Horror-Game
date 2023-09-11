@@ -1,3 +1,4 @@
+@tool
 extends CameraHandler
 
 var aiming:= false ## A boolean value that is used for checking if the user is aiming

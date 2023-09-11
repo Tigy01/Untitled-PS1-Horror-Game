@@ -28,7 +28,6 @@ func _process(delta) -> void:
 	elif camera_handler.view_centered:
 		twist_pivot.rotation.y = lerp_angle(twist_pivot.rotation.y, visuals.rotation.y + PI, 0.1) #centers the camera's y rotation to be behind the visuals
 		pitch_pivot.rotation.x = lerp_angle(pitch_pivot.rotation.x, 0, 0.15)
-
 func _physics_process(delta) -> void:
 	gun_behavior()
 	movement(delta)
@@ -38,9 +37,6 @@ func _physics_process(delta) -> void:
 ## Inherits the behavior of [method MainLoop._physics_process] and is passed [param delta]
 func movement(delta) -> void:
 	input = Vector3(Input.get_axis("move_left","move_right"), 0.0, Input.get_axis("move_up","move_down"))
-	if running: # unlockes the camera, signals the animation controller to play the run animation and change the weapon state to none, and modifies movement speed. 
-		camera_handler.aiming = false
-		animation_handler.swap_weapon('none')
 	if input:
 		running = Input.is_action_pressed("run")
 		physics_handler.change_speed(running)
@@ -50,12 +46,15 @@ func movement(delta) -> void:
 			var align = visuals.transform.looking_at(visuals.transform.origin - direction)
 			visuals.transform = visuals.transform.interpolate_with(align, delta * 10.0)
 	elif is_on_floor(): #Is only active when player input stops
-		velocity = physics_handler.get_friction(velocity, delta)
+		velocity = physics_handler.apply_friction(velocity, delta)
 	
 	if not is_on_floor(): # applies gravity reguardless of player input
 		velocity.y -= gravity * delta
 	elif Input.is_action_just_pressed("jump") and is_on_floor(): # applies intial jump velocity.
 		velocity.y = jump_velocity
+		animation_handler.swap_weapon('none')
+	if running: # unlockes the camera, signals the animation controller to play the run animation and change the weapon state to none, and modifies movement speed. 
+		camera_handler.aiming = false
 		animation_handler.swap_weapon('none')
 
 ##Preforms a series of checks to see if shooting should occur.
