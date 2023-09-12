@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://xls1b28dyfv1" path="res://addons/kenney_prototype_textures/orange/texture_05.png" id="1_b1g7s"]
 [ext_resource type="Material" uid="uid://d36o6j7wogjh1" path="res://Assets/Blockout/Blockout.material" id="1_ojcre"]
 [ext_resource type="Texture2D" uid="uid://c1a3k8myokdw2" path="res://addons/kenney_prototype_textures/purple/texture_04.png" id="3_47jnx"]
+[ext_resource type="Script" path="res://Scrips/Prefabs/CharacterBody3D.gd" id="5_5qie5"]
 [ext_resource type="Texture2D" uid="uid://vydmdwwlplwf" path="res://addons/kenney_prototype_textures/green/texture_01.png" id="5_j4ukc"]
-[ext_resource type="Script" path="res://CharacterBody3D.gd" id="5_xhbmy"]
 [ext_resource type="PackedScene" uid="uid://b7wyhquyj1tgm" path="res://Scenes/Components/camera_handler.tscn" id="6_ax47j"]
 [ext_resource type="PackedScene" uid="uid://pohxs0pewumc" path="res://Scenes/Components/PhysicsHandler.tscn" id="7_4ycch"]
 [ext_resource type="PackedScene" uid="uid://bv66jk8iuj48l" path="res://Scenes/UI/Pause Menu.tscn" id="8_optt7"]
@@ -119,7 +119,7 @@ material = SubResource("StandardMaterial3D_lt84g")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09775, 0)
-script = ExtResource("5_xhbmy")
+script = ExtResource("5_5qie5")
 
 [node name="Visuals" type="Node3D" parent="CharacterBody3D"]
 
