@@ -1,10 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://bty60eyd3b3a1"]
+[gd_scene load_steps=7 format=3 uid="uid://bty60eyd3b3a1"]
 
 [ext_resource type="Material" uid="uid://d36o6j7wogjh1" path="res://Assets/Blockout/Blockout.material" id="1_kcv14"]
 [ext_resource type="PackedScene" uid="uid://bp5icec5c2u0h" path="res://Scenes/PreFabs/Light Orb.tscn" id="2_ayfhf"]
 [ext_resource type="PackedScene" uid="uid://cdmwfbi1tjou2" path="res://Scenes/PreFabs/TPS - Player - Character.tscn" id="3_x4cvm"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_txroq"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ygsmu"]
+sky_material = SubResource("ProceduralSkyMaterial_txroq")
+
+[sub_resource type="Environment" id="Environment_fpfdr"]
+background_mode = 2
+sky = SubResource("Sky_ygsmu")
+tonemap_mode = 2
+
 [node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fpfdr")
 
 [node name="Blockouts" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.06225, 2.14476)

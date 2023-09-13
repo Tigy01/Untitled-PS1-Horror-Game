@@ -1,13 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://dmjigrr7kb5py"]
+[gd_scene load_steps=14 format=3 uid="uid://dmjigrr7kb5py"]
 
 [ext_resource type="Texture2D" uid="uid://xls1b28dyfv1" path="res://addons/kenney_prototype_textures/orange/texture_05.png" id="1_b1g7s"]
 [ext_resource type="Material" uid="uid://d36o6j7wogjh1" path="res://Assets/Blockout/Blockout.material" id="1_ojcre"]
 [ext_resource type="Texture2D" uid="uid://c1a3k8myokdw2" path="res://addons/kenney_prototype_textures/purple/texture_04.png" id="3_47jnx"]
-[ext_resource type="Script" path="res://Scrips/Prefabs/CharacterBody3D.gd" id="5_5qie5"]
 [ext_resource type="Texture2D" uid="uid://vydmdwwlplwf" path="res://addons/kenney_prototype_textures/green/texture_01.png" id="5_j4ukc"]
-[ext_resource type="PackedScene" uid="uid://b7wyhquyj1tgm" path="res://Scenes/Components/camera_handler.tscn" id="6_ax47j"]
-[ext_resource type="PackedScene" uid="uid://pohxs0pewumc" path="res://Scenes/Components/PhysicsHandler.tscn" id="7_4ycch"]
-[ext_resource type="PackedScene" uid="uid://bv66jk8iuj48l" path="res://Scenes/UI/Pause Menu.tscn" id="8_optt7"]
+[ext_resource type="PackedScene" uid="uid://cdmwfbi1tjou2" path="res://Scenes/PreFabs/TPS - Player - Character.tscn" id="5_snmbt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_plw42"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -72,16 +69,6 @@ uv1_world_triplanar = true
 point_size = 2.0
 proximity_fade_distance = 10.0
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_nbidm"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_3jmqq"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.1
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vuibn"]
-points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
-
 [node name="Node3D" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -117,30 +104,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56612, 0.5, -4.08847)
 use_collision = true
 material = SubResource("StandardMaterial3D_lt84g")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09775, 0)
-script = ExtResource("5_5qie5")
-
-[node name="Visuals" type="Node3D" parent="CharacterBody3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Visuals"]
-layers = 2
-mesh = SubResource("CapsuleMesh_nbidm")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Visuals/MeshInstance3D"]
-transform = Transform3D(0.999994, 0.00341868, -0.00110607, 0.00134416, -0.0704497, 0.997514, 0.00333226, -0.997509, -0.070454, 0, 0.474751, -0.519563)
-layers = 2
-mesh = SubResource("CylinderMesh_3jmqq")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-shape = SubResource("ConvexPolygonShape3D_vuibn")
-
-[node name="CameraHandler" parent="CharacterBody3D" instance=ExtResource("6_ax47j")]
-transform = Transform3D(0.999361, 0, 0.0357542, 0, 1, 0, -0.0357542, 0, 0.999361, 0, -0.370474, 0)
-camera_distance = 1.65
-
-[node name="PhysicsHandler" parent="CharacterBody3D" instance=ExtResource("7_4ycch")]
-transform = Transform3D(0.999678, 0.0235706, -0.00940464, -0.0235457, 0.999719, 0.00274619, 0.00946673, -0.00252384, 0.999952, 0, 0, 0)
-
-[node name="PauseMenu" parent="CharacterBody3D" instance=ExtResource("8_optt7")]
+[node name="TPS Player" parent="." instance=ExtResource("5_snmbt")]
