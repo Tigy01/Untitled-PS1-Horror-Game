@@ -8,6 +8,9 @@ signal change_weapon(weapon: String)##Allows Remote calls to the [AnimationHandl
 
 ## Handles modifying the player's camera based on whether the aim input is active.
 func aim_controls(running, delta) -> void:
+	if running: # unlockes the camera, signals the animation controller to play the run animation and change the weapon state to none, and modifies movement speed. 
+		aiming = false
+		change_weapon.emit('none')
 	if Input.is_action_just_pressed("aim"): #Centers View and changes the joypad's sensativity
 		joy_hori_sensitivity = 0.025
 		await get_tree().create_timer(0.25).timeout

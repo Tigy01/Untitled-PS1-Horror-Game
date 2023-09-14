@@ -11,10 +11,9 @@ extends CharacterBody3D
 var running:= false #custom
 
 func _physics_process(delta: float) -> void:
-	var GRAVITY = physics_handler.get_gravity(velocity.y)
 	if not is_on_floor(): # Add the gravity.
 		velocity.y -= physics_handler.get_gravity(velocity.y) * delta
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor(): # Handle Jump.
+	elif Input.is_action_just_pressed("jump"): # Handle Jump.
 		velocity.y = JUMP_VELOCITY
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction := (twist_pivot.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized() #motified

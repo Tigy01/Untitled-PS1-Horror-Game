@@ -12,7 +12,7 @@ class_name Player
 @onready var pitch_pivot: Node3D = $TPSCameraHandler/TwistPivot/PitchPivot ##A node that is used to rotate the Camera [i]vertically[/i] around a point
 @onready var visuals: Node3D = $Visuals
 
-var input:= Vector3.ZERO ## A [Vector3] representing the players input. The y value is not used but is needed for the [member Transform3D.basis] calculations to work.
+var input:= Vector2.ZERO ## A [Vector3] representing the players input. The y value is not used but is needed for the [member Transform3D.basis] calculations to work.
 var direction: Vector3 ##Is used to define a vector that is the direction in front of the camera.
 func _process(delta) -> void:
 	animation_handler.update(input, clamp(((rad_to_deg(pitch_pivot.rotation.x))/45), -1, 1), is_on_floor())
@@ -32,19 +32,14 @@ func _physics_process(delta) -> void:
 ## Handles modifying the player's location based on keyboard input [br][br]
 ## Inherits the behavior of [method MainLoop._physics_process] and is passed [param delta]
 func movement(delta) -> void:
-	if physics_handler.running: # unlockes the camera, signals the animation controller to play the run animation and change the weapon state to none, and modifies movement speed. 
-		camera_handler.aiming = false
-		animation_handler.swap_weapon('none')
-	
 	if not is_on_floor(): # applies gravity reguardless of player input
 		velocity.y -= physics_handler.get_gravity(velocity.y) * delta
-	elif Input.is_action_just_pressed("jump") and is_on_floor(): # applies intial jump velocity.
+	elif Input.is_action_just_pressed("jump"): # applies intial jump velocity.
 		velocity.y = physics_handler.get_jump_velocity()
 		animation_handler.swap_weapon('none')
-	
-	input = Vector3(Input.get_axis("move_left","move_right"), 0.0, Input.get_axis("move_up","move_down"))
-	if input:
-		direction = (twist_pivot.basis * input).normalized() 
+	input=Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var direction := (twist_pivot.basis * Vector3(input.x, 0, input.y)).normalized() #motified
+	if direction: 
 		velocity = physics_handler.apply_acceleration(velocity, direction, delta)
 		if !camera_handler.aiming:
 			var align = visuals.transform.looking_at(visuals.transform.origin - direction)
