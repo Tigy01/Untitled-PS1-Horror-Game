@@ -22,7 +22,7 @@ func _process(delta) -> void:
 	if camera_handler.aiming and camera_handler.view_centered: ##Has to be run in the player's script to avoid useless errors. Works with or without
 		visuals.rotation.y = twist_pivot.rotation.y + PI #rotates visuals to face the where the camera is.
 	elif camera_handler.aiming:
-		twist_pivot.rotation.y = lerp_angle(twist_pivot.rotation.y, visuals.rotation.y + PI, 6 *delta) #centers the camera's y rotation to be behind the visuals
+		twist_pivot.rotation.y = lerp_angle(twist_pivot.rotation.y, visuals.rotation.y + PI, 6*delta) #centers the camera's y rotation to be behind the visuals
 		pitch_pivot.rotation.x = lerp_angle(pitch_pivot.rotation.x, 0, 9*delta)
 
 func _physics_process(delta) -> void:
