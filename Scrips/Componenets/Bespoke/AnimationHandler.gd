@@ -31,7 +31,7 @@ func update(input, look: float, on_floor: bool):
 			set("parameters/Weaponless/walk_state/blend_amount", move_state)
 		'rifle':
 			set("parameters/Weapon/Rifle/Aim/blend_amount", move_toward(get("parameters/Weapon/Rifle/Aim/blend_amount"), aim, 5 * time_delta))
-			set("parameters/Weapon/Rifle/Strafe/blend_position", lerp(get("parameters/Weapon/Rifle/Strafe/blend_position"), Vector2(input.x, input.z), 6.25 * time_delta))
+			set("parameters/Weapon/Rifle/Strafe/blend_position", lerp(get("parameters/Weapon/Rifle/Strafe/blend_position"), Vector2(input.x, input.y), 6.25 * time_delta))
 			set("parameters/Weapon/Rifle/Look/add_amount", look)
 			set("parameters/Weapon/Rifle/Lowered/blend_position", move_state)
 
