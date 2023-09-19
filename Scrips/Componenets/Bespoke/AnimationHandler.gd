@@ -15,7 +15,6 @@ func _ready():
 
 func _process(delta):
 	time_delta = delta
-	
 
 ## [b]Handles changing the active animation states and lerping between blend positions.[/b][br][br]
 ## [param input] is the [member Player.input] variable and is used to control[br]
@@ -24,7 +23,7 @@ func _process(delta):
 ## [param on_floor] is passed in from the [method CharacterBody3D.is_on_floor] method.
 func update(input, look: float, on_floor: bool): 
 	var aim  = Input.is_action_pressed('aim')
-	var jump_blend = move_toward(get('parameters/Weaponless/Jump/blend_amount'), not on_floor, 5* time_delta)
+	var jump_blend = move_toward(get('parameters/Weaponless/Jump/blend_amount'), not on_floor, 5 * time_delta)
 	set('parameters/Weaponless/Jump/blend_amount', jump_blend) 
 	match equipped_weapon: ##
 		'none':

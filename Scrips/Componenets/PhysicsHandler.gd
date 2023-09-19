@@ -25,21 +25,15 @@ var recalculate_friction:= true ##A boolean value that is used to specify if fri
 @export_range(0.05, 30, 0.05, "suffix:m") var jump_height: float = 1.45 ##The Height in meters that the jump should peak at
 @export_subgroup("Complex Jump")
 ##The time in seconds it takes to get to the [member jump_height] of the jump
-@export_range(0.05, 10, 0.005, "suffix:s") var time_to_peak: float = 0.3: 
-	set(val):
-		peak_time = val * 2
+@export_range(0.05, 10, 0.005, "suffix:s") var time_to_peak: float = 0.3
 ##The time in seconds it takes to get to the ground from the peak
-@export_range(0.05, 10, 0.005, "suffix:s") var time_to_ground: float = 0.45:
-	set(val):
-		fall_time = val * 2
+@export_range(0.05, 10, 0.005, "suffix:s") var time_to_ground: float = 0.45
 var jump_time = time_to_jump/2
-var peak_time = time_to_peak *2 ##Needs to be used because of quirks with godots set_get
-var fall_time = time_to_ground *2 ##Needs to be used because of quirks with godots set_get
 var jump_velocity:float##The value that should be added to the velocity when jump is activated
 ##################################################################
-@onready var gravity:float= abs(find_slope(other_gravity_formula, jump_time)) ##The gravity that is needed for the jump to complete in the given [member jump_time]
-@onready var peak_gravity:float= abs(find_slope(gravity_formula, peak_time)) ##The gravity that is needed for the jump to complete in the given [member peak_time]
-@onready var fall_gravity:float= abs(find_slope(gravity_formula, fall_time))##The gravity that is needed for the jump to complete in the given fall_time
+@onready var gravity:float= abs(find_slope(gravity_formula, jump_time)) ##The gravity that is needed for the jump to complete in the given [member jump_time]
+@onready var peak_gravity:float= abs(find_slope(gravity_formula, time_to_peak)) ##The gravity that is needed for the jump to complete in the given [member peak_time]
+@onready var fall_gravity:float= abs(find_slope(gravity_formula, time_to_ground))##The gravity that is needed for the jump to complete in the given fall_time
 
 ##Calculates the change in velocity required to simulate accelerating to a predefined speed.
 func apply_acceleration(velocity: Vector3, direction: Vector3, delta:float)-> Vector3:
@@ -74,13 +68,15 @@ func find_slope(my_func: Callable, time_interval) -> float:
 	var slope = y2-y1
 	return slope
 
-func other_gravity_formula(x: float, time_interval: float):
-	var y = ((-jump_height)*((2.0*x) - (2.0*time_interval)))/pow(time_interval,2.0)
-
 ##Returns the output of a formula that is used to find the value of the derivative of a perabola at a given point.
-func gravity_formula(x: float, time_interval: float) -> float: 
-	var y = -1*((4.0*jump_height)*((2.0*x)-time_interval))/pow(time_interval,2.0)
+func gravity_formula(x: float, time_interval: float) -> float:
+	var y = ((-jump_height)*((2.0*x) - (2.0*time_interval)))/pow(time_interval,2.0)
 	return y
+
+##Like the other gravity formula but the time interval should be the full time not the vertex.
+#func gravity_formula(x: float, time_interval: float) -> float: 
+#	var y = -1*((4.0*jump_height)*((2.0*x)-time_interval))/pow(time_interval,2.0)
+#	return y
 
 ##Calculates the change in velocity required to simulate friction using [member slow_time]. 
 ##Should be calculated when input is first released otherwise velocity just approaches zero.
@@ -99,4 +95,4 @@ func get_gravity(y_velocity) ->float:
 
 ##Initial velocity of gravity function
 func get_jump_velocity() ->float: 
-	return other_gravity_formula(0.0, jump_time) if simple_jump else gravity_formula(0.0, peak_time)
+	return gravity_formula(0.0, jump_time) if simple_jump else gravity_formula(0.0, time_to_peak)
