@@ -42,7 +42,7 @@ func camera_control(event) -> void:
 		twist_amount = -event.relative.x * mouse_hori_sensitivity
 		pitch_amount = -event.relative.y * mouse_vert_sensitivity
 	elif event is InputEventJoypadMotion: #if joypad input
-		var axis_vector= Vector2(Input.get_axis('look_left','look_right'), Input.get_axis('look_down','look_up')) #Direction of event.
+		var axis_vector= Vector2(Input.get_axis("look_left","look_right"), Input.get_axis("look_down","look_up")) #Direction of event.
 		twist_amount = -axis_vector.x * joy_hori_sensitivity
 		pitch_amount = axis_vector.y * joy_vert_sensitivity
 	

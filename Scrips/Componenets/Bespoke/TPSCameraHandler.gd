@@ -28,7 +28,7 @@ func aim_controls(running, delta) -> void:
 		aiming = false
 	view_centered = false
 
-func _input(event):
+func _input(event) -> void:
 	if (aiming and not view_centered):
 		return
 	camera_control(event)

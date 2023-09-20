@@ -3,6 +3,9 @@ extends CharacterBody3D
 ## This is the Player's control script and is meant to handle movement and Animation.
 ##
 ## This is not meant to actually singal changes to the animator node, rather it should signal changes to the Player animation controller.
+
+var input:= Vector2.ZERO ## A [Vector3] representing the players input. The y value is not used but is needed for the [member Transform3D.basis] calculations to work.
+
 @onready var animation_handler: AnimationHandler = $Visuals/AnimationHandler
 @onready var camera_handler: CameraHandler = $TPSCameraHandler
 @onready var physics_handler: PhysicsHandler = $PhysicsHandler
@@ -12,8 +15,6 @@ extends CharacterBody3D
 @onready var pitch_pivot: Node3D = $TPSCameraHandler/TwistPivot/PitchPivot ## A node that is used to rotate the Camera [i]vertically[/i] around a point
 @onready var visuals: Node3D = $Visuals
 
-var input:= Vector2.ZERO ## A [Vector3] representing the players input. The y value is not used but is needed for the [member Transform3D.basis] calculations to work.
-var direction: Vector3 ## Is used to define a vector that is the direction in front of the camera.
 func _process(delta) -> void:
 	animation_handler.update(input, clamp((rad_to_deg(pitch_pivot.rotation.x) / 45), -1, 1), is_on_floor())
 	animation_handler.update_move_state(input, physics_handler.running)
@@ -26,12 +27,21 @@ func _process(delta) -> void:
 		pitch_pivot.rotation.x = lerp_angle(pitch_pivot.rotation.x, 0, 9.0 * delta)
 
 func _physics_process(delta) -> void:
-	gun_behavior()
-	movement(delta)
+	_gun_behavior()
+	_movement(delta)
+
+## Preforms a series of checks to see if shooting should occur.
+func _gun_behavior() -> void:
+	if not Input.is_action_just_pressed("shoot") or not camera_handler.aiming:
+		return
+	animation_handler.shoot()
+	if aim_ray.is_colliding(): # Remember! aimray is on layer 2.
+		var target = aim_ray.get_collider()
+		target.queue_free()
 
 ## Handles modifying the player's location based on keyboard input [br][br]
 ## Inherits the behavior of [method MainLoop._physics_process] and is passed [param delta]
-func movement(delta) -> void:
+func _movement(delta) -> void:
 	if not is_on_floor(): # Applies gravity reguardless of player input
 		velocity.y -= physics_handler.get_gravity(velocity.y) * delta
 	elif Input.is_action_just_pressed("jump"): # Applies intial jump velocity.
@@ -47,12 +57,3 @@ func movement(delta) -> void:
 	elif is_on_floor(): #Is only active when player input stops
 		velocity = physics_handler.apply_friction(velocity, delta)
 	move_and_slide()
-
-## Preforms a series of checks to see if shooting should occur.
-func gun_behavior():
-	if not Input.is_action_just_pressed("shoot") or not camera_handler.aiming:
-		return
-	animation_handler.shoot()
-	if aim_ray.is_colliding(): # Remember! aimray is on layer 2.
-		var target = aim_ray.get_collider()
-		target.queue_free()
