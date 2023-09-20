@@ -9,7 +9,7 @@ func _ready() -> void:
 	resume_button.pressed.connect(unpause)
 
 func _unhandled_input(_event: InputEvent) -> void: #executes if an input does not interact with any node. EG a click that does not press any button will fire a gun
-	if Input.is_action_just_pressed('Pause'):
+	if Input.is_action_just_pressed("Pause"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		pause()
 

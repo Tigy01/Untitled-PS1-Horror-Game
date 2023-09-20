@@ -1,6 +1,6 @@
 @tool
-extends Node3D
 class_name CameraHandler
+extends Node3D
 
 @onready var twist_pivot: Node3D = $TwistPivot ##Point around which the camera [i]horizontally[/i] rotates
 @onready var pitch_pivot: Node3D = $TwistPivot/PitchPivot ##Point around which the camera [i]vertically[/i] rotates

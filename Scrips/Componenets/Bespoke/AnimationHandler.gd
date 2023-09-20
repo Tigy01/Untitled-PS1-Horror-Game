@@ -1,17 +1,19 @@
-extends AnimationTree
 class_name AnimationHandler
+extends AnimationTree
 ## Is responsible for changing between animation states and blend positions based on calls from the player script
 #
 ## This is used to help simplify and shorten the process of animating player actions from the Player Controller 
 ## and should be the only script that directly sets properties of the Animation Tree.
 
-var equipped_weapon:= 'none' ##String value representing which is the currently equipped weapon
+@onready var top_state_machine: AnimationNodeStateMachinePlayback = self["parameters/playback"] ##The topmost state machine that controls switching between weapon animations and weaponless animations
+@onready var weapon_state_machine: AnimationNodeStateMachinePlayback = self["parameters/Weapon/playback"] ##Handles transitioning between weapon animations
+
+var equipped_weapon:= "none" ##String value representing which is the currently equipped weapon
 var move_state:= -1.0 ## A value with a range from zero to 1 which controls movement animations
-var top_state: AnimationNodeStateMachinePlayback = self["parameters/playback"] ##The topmost state machine that controls switching between weapon animations and weaponless animations
-var weapon_state: AnimationNodeStateMachinePlayback = self["parameters/Weapon/playback"] ##Handles transitioning between weapon animations
 var time_delta: float
+
 func _ready():
-	set('parameters/Weapon/Rifle/Fix/add_amount', 0.2)
+	set("parameters/Weapon/Rifle/Fix/add_amount", 0.2)
 
 func _process(delta):
 	time_delta = delta
@@ -22,15 +24,19 @@ func _process(delta):
 ## [param look] is a float that sets how much the player should look up or down and ranges from [b]-1[/b] to [b]1[/b]. [br]
 ## [param on_floor] is passed in from the [method CharacterBody3D.is_on_floor] method.
 func update(input, look: float, on_floor: bool): 
-	var aim  = Input.is_action_pressed('aim')
-	var jump_blend = move_toward(get('parameters/Weaponless/Jump/blend_amount'), not on_floor, 5 * time_delta)
-	set('parameters/Weaponless/Jump/blend_amount', jump_blend) 
+	var aim  = Input.is_action_pressed("aim")
+	var jump_blend = move_toward(get("parameters/Weaponless/Jump/blend_amount"), not on_floor, 5.0 * time_delta)
+	set("parameters/Weaponless/Jump/blend_amount", jump_blend) 
 	match equipped_weapon: ##
-		'none':
+		"none":
 			set("parameters/Weaponless/walk_state/blend_amount", move_state)
-		'rifle':
-			set("parameters/Weapon/Rifle/Aim/blend_amount", move_toward(get("parameters/Weapon/Rifle/Aim/blend_amount"), aim, 5 * time_delta))
-			set("parameters/Weapon/Rifle/Strafe/blend_position", lerp(get("parameters/Weapon/Rifle/Strafe/blend_position"), Vector2(input.x, input.y), 6.25 * time_delta))
+		"rifle":
+			set("parameters/Weapon/Rifle/Aim/blend_amount", 
+					move_toward(get("parameters/Weapon/Rifle/Aim/blend_amount"), 
+					aim, 5.0 * time_delta))
+			set("parameters/Weapon/Rifle/Strafe/blend_position", 
+					lerp(get("parameters/Weapon/Rifle/Strafe/blend_position"), 
+					Vector2(input.x, input.y), 6.25 * time_delta))
 			set("parameters/Weapon/Rifle/Look/add_amount", look)
 			set("parameters/Weapon/Rifle/Lowered/blend_position", move_state)
 
@@ -46,13 +52,13 @@ func update_move_state(input, running):
 func swap_weapon(weapon):
 	equipped_weapon = weapon
 	match equipped_weapon:
-		'none':
-			top_state.travel('Weaponless')
+		"none":
+			top_state_machine.travel("Weaponless")
 			set("parameters/Weaponless/walk_state/blend_amount", move_state)
-		'rifle':
-			top_state.travel('Weapon')
-			weapon_state.travel('Rifle')
+		"rifle":
+			top_state_machine.travel("Weapon")
+			weapon_state_machine.travel("Rifle")
 
 ##Requests the [b]Shoot[/b] OneShot to play
 func shoot():
-	set('parameters/Weapon/Rifle/Shoot/request', true)
+	set("parameters/Weapon/Rifle/Shoot/request", true)
