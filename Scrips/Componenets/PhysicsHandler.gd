@@ -15,9 +15,7 @@ extends Node3D
 var running:=false ##A boolean value that is used to specify if the character is meant to be running
 
 var _speed:= 3.0 ##Current movement speed
-var _acceleration:= Vector3.ZERO ##Acceleration when speeding up
 var _friction:= Vector3.ZERO ##Acceleration when slowing to a stop
-var _recalculate_friction:= true ##A boolean value that is used to specify if friction needs to be calculated again
 ##################################################################
 
 @export_group("Jump")
@@ -32,12 +30,11 @@ var _recalculate_friction:= true ##A boolean value that is used to specify if fr
 @export_range(0.05, 10, 0.005, "suffix:s") var time_to_ground: float = 0.45 ##The time in seconds it takes to get to the ground from the peak
 
 var _jump_time = time_to_jump/2
-var _jump_velocity:float ##The value that should be added to the velocity when jump is activated
 ##################################################################
 
-@onready var gravity:float= abs(_find_slope(_gravity_formula, _jump_time)) ##The gravity that is needed for the jump to complete in the given [member jump_time]
-@onready var peak_gravity:float= abs(_find_slope(_gravity_formula, time_to_peak)) ##The gravity that is needed for the jump to complete in the given [member peak_time]
-@onready var fall_gravity:float= abs(_find_slope(_gravity_formula, time_to_ground))##The gravity that is needed for the jump to complete in the given fall_time
+@onready var _gravity:float= abs(_find_slope(_gravity_formula, _jump_time)) ##The gravity that is needed for the jump to complete in the given [member jump_time]
+@onready var _peak_gravity:float= abs(_find_slope(_gravity_formula, time_to_peak)) ##The gravity that is needed for the jump to complete in the given [member peak_time]
+@onready var _fall_gravity:float= abs(_find_slope(_gravity_formula, time_to_ground))##The gravity that is needed for the jump to complete in the given fall_time
 
 ##Calculates the change in velocity required to simulate accelerating to a predefined speed.
 func apply_acceleration(velocity: Vector3, direction: Vector3, delta:float)-> Vector3:
@@ -61,8 +58,8 @@ func apply_friction(velocity:Vector3, delta: float) -> Vector3:
 ##Appropriate Gravity based on [member Player.velocity] and [member simple_jump]
 func get_gravity(y_velocity) ->float:
 	if simple_jump:
-		return gravity
-	return peak_gravity if y_velocity>0 else fall_gravity #from zero to peak 
+		return _gravity
+	return _peak_gravity if y_velocity>0 else _fall_gravity #from zero to peak 
 
 ##Initial velocity of gravity function
 func get_jump_velocity() ->float: 

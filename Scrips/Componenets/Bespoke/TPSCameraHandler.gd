@@ -1,10 +1,15 @@
 @tool
 extends CameraHandler
 
+signal changed_weapon(weapon: String)##Allows Remote calls to the [AnimationHandler]
+
 var aiming:= false ## A boolean value that is used for checking if the user is aiming
 var view_centered:= false ## A boolean that outlines whether the camera is centered behind the player"s back when aiming
 
-signal changed_weapon(weapon: String)##Allows Remote calls to the [AnimationHandler]
+func _input(event) -> void:
+	if (aiming and not view_centered):
+		return
+	camera_control(event)
 
 ## Handles modifying the player's camera based on whether the aim input is active.
 func aim_controls(running, delta) -> void:
@@ -28,7 +33,4 @@ func aim_controls(running, delta) -> void:
 		aiming = false
 	view_centered = false
 
-func _input(event) -> void:
-	if (aiming and not view_centered):
-		return
-	camera_control(event)
+
