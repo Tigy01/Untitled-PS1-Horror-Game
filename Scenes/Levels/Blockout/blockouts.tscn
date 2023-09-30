@@ -1,0 +1,423 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvrhvb4fnx7s4"]
+
+[ext_resource type="Material" uid="uid://d36o6j7wogjh1" path="res://Scenes/Levels/Blockout/Blockout.material" id="1_blfmw"]
+[ext_resource type="PackedScene" uid="uid://bp5icec5c2u0h" path="res://Scenes/PreFabs/Light Orb.tscn" id="2_3db3o"]
+
+[node name="Blockouts" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.06225, 2.14476)
+
+[node name="Player Room" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.24928, 4, -2.66187)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(8.5091, 8, 6.713)
+
+[node name="Player Room Interior" type="CSGBox3D" parent="Player Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.740277, -0.0526068)
+operation = 2
+size = Vector3(8.25295, 4.5, 6.35065)
+
+[node name="Player Room Door" type="CSGBox3D" parent="Player Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -3.5)
+operation = 2
+size = Vector3(1, 2, 2)
+
+[node name="Light Orb2" parent="Player Room" instance=ExtResource("2_3db3o")]
+
+[node name="Player Room Door6" type="CSGBox3D" parent="Player Room"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.44246, -2.00272, 1.66915)
+operation = 2
+size = Vector3(1, 2, 2)
+
+[node name="East Side" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.024)
+
+[node name="Conference Room" type="CSGBox3D" parent="East Side"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.57852, 3.125, -29.7816)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(10.3746, 5.63381, 14.5076)
+
+[node name="Conference Room Interior" type="CSGBox3D" parent="East Side/Conference Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.372736, 0.140292, 0.220587)
+material_override = ExtResource("1_blfmw")
+operation = 2
+size = Vector3(9.641, 4.5, 14.407)
+
+[node name="Light Orb" parent="East Side/Conference Room" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.503372, 1.58498, -0.621851)
+
+[node name="Light Orb2" parent="East Side/Conference Room" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.503372, 1.58498, 13.3463)
+
+[node name="East Hallway Bedroom" type="CSGBox3D" parent="East Side"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8711, 3.13912, -16.3492)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(10.9315, 5.63381, 12.2904)
+
+[node name="East Hallway Interior" type="CSGBox3D" parent="East Side/East Hallway Bedroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.89, 0.120381, 0.368999)
+material_override = ExtResource("1_blfmw")
+operation = 2
+size = Vector3(9.154, 4.5, 11.079)
+
+[node name="East Hallway Door3" type="CSGBox3D" parent="East Side/East Hallway Bedroom"]
+transform = Transform3D(-0.999949, 0.00888361, -0.00485185, 0.0088835, 0.999961, 4.31033e-05, 0.00485206, -1.86265e-09, -0.999988, -1.36896, -1.12092, -6.57866)
+operation = 2
+size = Vector3(1, 2, 2.85346)
+
+[node name="Broom Closet" type="CSGBox3D" parent="East Side"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10804, 3.17631, -8.40937)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(7.3854, 5.63381, 3.72261)
+
+[node name="Broom Closet Interior" type="CSGBox3D" parent="East Side/Broom Closet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.974775, 0.103914, 0.0703335, -0.0142879)
+material_override = ExtResource("1_blfmw")
+operation = 2
+size = Vector3(7.379, 4.5, 3.615)
+
+[node name="Light Orb" parent="East Side/Broom Closet" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.41875, 1.61717, 0.271601)
+
+[node name="East Hall2" type="CSGBox3D" parent="East Side"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 2.00851, 4, -21.4523)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(4.82753, 8, 31.1653)
+
+[node name="Hall Interior" type="CSGBox3D" parent="East Side/East Hall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0260468, -0.748201, 0.0406551)
+operation = 2
+size = Vector3(4.5, 4.5, 31.456)
+
+[node name="Light Orb" parent="East Side/East Hall2/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15256e-07, 1.24325, 10.5728)
+
+[node name="Light Orb2" parent="East Side/East Hall2/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15256e-07, 1.24325, -1.58588)
+
+[node name="Light Orb3" parent="East Side/East Hall2/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00864983, 1.23446, -13.5388)
+
+[node name="N Metting Room door" type="CSGBox3D" parent="East Side/East Hall2"]
+transform = Transform3D(0.00485182, 0, -0.999988, 0, 1, 0, 0.999988, 0, 0.00485182, -3.28926, -2, -2.4657)
+operation = 2
+size = Vector3(1, 2, 2.85346)
+
+[node name="S Meeting Room door 2" type="CSGBox3D" parent="East Side/East Hall2"]
+transform = Transform3D(0.00485182, 0, -0.999988, 0, 1, 0, 0.999988, 0, 0.00485182, -3.28926, -2, -13.1477)
+operation = 2
+size = Vector3(1, 2, 2.85346)
+
+[node name="East Hallway Door4" type="CSGBox3D" parent="East Side/East Hall2"]
+transform = Transform3D(0.00485182, 0, -0.999988, 0, 1, 0, 0.999988, 0, 0.00485182, -3.28937, -1.99323, 5.66292)
+operation = 2
+size = Vector3(1, 2, 2.85346)
+
+[node name="North Hall Door" type="CSGBox3D" parent="East Side/East Hall2"]
+transform = Transform3D(0.00485182, 0, -0.999988, 0, 1, 0, 0.999988, 0, 0.00485182, 2.86005, -1.99605, 13.0679)
+operation = 2
+size = Vector3(1, 2, 2.24505)
+
+[node name="Broom Closet Door" type="CSGBox3D" parent="East Side/East Hall2"]
+transform = Transform3D(0.00485182, 0, -0.999988, 0, 1, 0, 0.999988, 0, 0.00485182, -3.01142, -1.99605, 13.0505)
+operation = 2
+size = Vector3(1, 2, 2.24505)
+
+[node name="South Side" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.045)
+
+[node name="West Hall3" type="CSGBox3D" parent="South Side"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 13.971, 4, -39.426)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(4.82753, 8, 28.715)
+
+[node name="Hall Interior" type="CSGBox3D" parent="South Side/West Hall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00759888, -0.738162, -0.1021)
+operation = 2
+size = Vector3(4.5, 4.5, 28.617)
+
+[node name="Light Orb" parent="South Side/West Hall3/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15256e-07, 1.24325, 10.5728)
+
+[node name="Light Orb2" parent="South Side/West Hall3/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15256e-07, 1.24325, -1.58588)
+
+[node name="Light Orb3" parent="South Side/West Hall3/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00864983, 1.23446, -13.5388)
+
+[node name="East Hall Door" type="CSGBox3D" parent="South Side/West Hall3"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.261, -2, 11.975)
+operation = 2
+size = Vector3(1, 2, 0.996075)
+
+[node name="Central Room door" type="CSGBox3D" parent="South Side/West Hall3"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.26083, -2, -2.5331)
+operation = 2
+size = Vector3(1, 2, 0.996075)
+
+[node name="South Hall Center room" type="CSGBox3D" parent="South Side"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4603, 4, -33.533)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(6.93, 8, 8.05478)
+
+[node name="South East Room Interior" type="CSGBox3D" parent="South Side/South Hall Center room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0993309, -0.743897, 0.0163212)
+operation = 2
+size = Vector3(6.75, 4.5, 7.689)
+
+[node name="Light Orb" parent="South Side/South Hall Center room/South East Room Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.150536, 1.27474, -0.438387)
+
+[node name="N Metting Room door2" type="CSGBox3D" parent="South Side/South Hall Center room"]
+transform = Transform3D(-0.999988, 0, -0.00485195, 0, 1, 0, 0.00485195, 0, -0.999988, 0.0163231, -2, -4.64377)
+operation = 2
+size = Vector3(1, 2, 2.85346)
+
+[node name="N Metting Room door3" type="CSGBox3D" parent="South Side/South Hall Center room"]
+transform = Transform3D(-0.999988, 0, -0.00485195, 0, 1, 0, 0.00485195, 0, -0.999988, 0.0163231, -2, 4.66339)
+operation = 2
+size = Vector3(1, 2, 2.85346)
+
+[node name="South East Hall Center Room" type="CSGBox3D" parent="South Side"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.43754, 4, -33.533)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(6.93, 8, 8)
+
+[node name="South East Room Interior" type="CSGBox3D" parent="South Side/South East Hall Center Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.182877, -0.743896, 0.395644)
+operation = 2
+size = Vector3(6.5, 4.5, 8.25)
+
+[node name="Light Orb" parent="South Side/South East Hall Center Room/South East Room Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.150536, 1.27474, -0.438391)
+
+[node name="South Hall Center room3" type="CSGBox3D" parent="South Side"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 24.4119, 4, -33.533)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(6.93, 8, 7.83839)
+
+[node name="South East Room Interior" type="CSGBox3D" parent="South Side/South Hall Center room3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.182877, -0.743897, -0.407215)
+operation = 2
+size = Vector3(6.5, 4.5, 8.25)
+
+[node name="Light Orb" parent="South Side/South Hall Center room3/South East Room Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.150536, 1.27474, -0.438387)
+
+[node name="West Side" type="Node3D" parent="."]
+
+[node name="West Hall" type="CSGBox3D" parent="West Side"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 30.7405, 4, -26.4387)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(4.82753, 8, 31.1653)
+
+[node name="Hall Interior" type="CSGBox3D" parent="West Side/West Hall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00922012, -0.738162, -0.19384)
+operation = 2
+size = Vector3(4.5, 4.5, 31)
+
+[node name="Light Orb" parent="West Side/West Hall/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15256e-07, 1.24325, 10.5728)
+
+[node name="Light Orb2" parent="West Side/West Hall/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15256e-07, 1.24325, -1.58588)
+
+[node name="Light Orb3" parent="West Side/West Hall/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00864983, 1.23446, -13.5388)
+
+[node name="West Hall Interior" type="CSGBox3D" parent="West Side/West Hall"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.2608, -2, 13.0273)
+operation = 2
+size = Vector3(1, 2, 0.996075)
+
+[node name="Ice Room Door" type="CSGBox3D" parent="West Side/West Hall"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.27103, -1.74101, 0.0734653)
+operation = 2
+size = Vector3(3.03155, 2.49292, 0.996075)
+
+[node name="Ice Room" type="CSGBox3D" parent="West Side/West Hall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.34359, 0, -0.0624638)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(3.85794, 8, 5.63274)
+
+[node name="Ice Room Interior" type="CSGBox3D" parent="West Side/West Hall/Ice Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12357, -0.738162, 0.0534821)
+operation = 2
+size = Vector3(3.758, 4.5, 5.328)
+
+[node name="Light Orb" parent="West Side/West Hall/Ice Room/Ice Room Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.150536, 1.27474, -0.438387)
+
+[node name="North East Room" type="CSGBox3D" parent="West Side/West Hall"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.75384, -0.00261116, -10.1995)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(8.5091, 8, 6.713)
+
+[node name="Player Room Interior" type="CSGBox3D" parent="West Side/West Hall/North East Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.751142, -0.168412)
+operation = 2
+size = Vector3(8.25295, 4.5, 6.35065)
+
+[node name="Light Orb2" parent="West Side/West Hall/North East Room" instance=ExtResource("2_3db3o")]
+
+[node name="North West Joining Door" type="CSGBox3D" parent="West Side/West Hall"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.04806, -2.00272, -11.9252)
+operation = 2
+size = Vector3(1, 2, 2)
+
+[node name="North West Joining Door2" type="CSGBox3D" parent="West Side/West Hall"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -3.04606, -2.00272, -11.9474)
+operation = 2
+size = Vector3(1, 2, 2)
+
+[node name="North East Room2" type="CSGBox3D" parent="West Side/West Hall"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -5.75183, -0.00261116, -10.1844)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(8.5091, 8, 6.713)
+
+[node name="Player Room Interior" type="CSGBox3D" parent="West Side/West Hall/North East Room2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.751142, -0.195423)
+operation = 2
+size = Vector3(8.25295, 4.5, 6.35065)
+
+[node name="Light Orb2" parent="West Side/West Hall/North East Room2" instance=ExtResource("2_3db3o")]
+
+[node name="North West Joining Door3" type="CSGBox3D" parent="West Side/West Hall"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -3.04606, -2.00272, 13.0532)
+operation = 2
+size = Vector3(1, 2, 2)
+
+[node name="North East Room3" type="CSGBox3D" parent="West Side/West Hall"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -5.75184, -0.00261116, 10.9387)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(8.5091, 8, 6.713)
+
+[node name="Player Room Interior" type="CSGBox3D" parent="West Side/West Hall/North East Room3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.751142, -0.185387)
+operation = 2
+size = Vector3(8.25295, 4.5, 6.35065)
+
+[node name="Light Orb2" parent="West Side/West Hall/North East Room3" instance=ExtResource("2_3db3o")]
+
+[node name="North Side" type="Node3D" parent="."]
+
+[node name="North Hall" type="CSGBox3D" parent="North Side"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.7954, 4, -8.43201)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(4.828, 8, 28.747)
+
+[node name="Hall Interior" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00759697, -0.751832, -0.1021)
+operation = 2
+size = Vector3(4.5, 4.5, 28.617)
+
+[node name="Light Orb" parent="North Side/North Hall/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15256e-07, 1.24325, 10.5728)
+
+[node name="Light Orb2" parent="North Side/North Hall/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15256e-07, 1.24325, -1.58588)
+
+[node name="Light Orb3" parent="North Side/North Hall/Hall Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00864983, 1.23446, -13.5388)
+
+[node name="Ice Room Door" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.28608, -2, -7.60033)
+operation = 2
+size = Vector3(1, 2, 0.996075)
+
+[node name="West Hall door" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.2608, -2, 11.9629)
+operation = 2
+size = Vector3(1, 2, 0.996075)
+
+[node name="Ice Room" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.34359, 0, -9.06433)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(3.85794, 8, 5.63274)
+
+[node name="Ice Room Interior" type="CSGBox3D" parent="North Side/North Hall/Ice Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12357, -0.738162, 0.0534821)
+operation = 2
+size = Vector3(3.758, 4.5, 5.328)
+
+[node name="Light Orb" parent="North Side/North Hall/Ice Room/Ice Room Interior" instance=ExtResource("2_3db3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.150536, 1.27474, -0.438387)
+
+[node name="North East Room" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.76624, -0.00261116, -8.03351)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(8.5091, 8, 6.713)
+
+[node name="Player Room Interior" type="CSGBox3D" parent="North Side/North Hall/North East Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.751142, -0.168412)
+operation = 2
+size = Vector3(8.25295, 4.5, 6.35065)
+
+[node name="Light Orb2" parent="North Side/North Hall/North East Room" instance=ExtResource("2_3db3o")]
+
+[node name="North Central Room" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.76683, -0.00261116, 1.67411)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(8.5091, 8, 6.713)
+
+[node name="Player Room Interior" type="CSGBox3D" parent="North Side/North Hall/North Central Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.751142, -0.168412)
+operation = 2
+size = Vector3(8.25295, 4.5, 6.35065)
+
+[node name="Light Orb2" parent="North Side/North Hall/North Central Room" instance=ExtResource("2_3db3o")]
+
+[node name="North West Room" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.76683, -0.00261116, 10.165)
+material_override = ExtResource("1_blfmw")
+use_collision = true
+size = Vector3(8.5091, 8, 6.713)
+
+[node name="Player Room Interior" type="CSGBox3D" parent="North Side/North Hall/North West Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.751142, -0.168412)
+operation = 2
+size = Vector3(8.25295, 4.5, 6.35065)
+
+[node name="Light Orb2" parent="North Side/North Hall/North West Room" instance=ExtResource("2_3db3o")]
+
+[node name="North East Room Door" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.27742, -2.00261, -8.03351)
+operation = 2
+size = Vector3(1, 2, 2)
+
+[node name="North Central Room Door" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.27801, -2.00261, 1.67411)
+operation = 2
+size = Vector3(1, 2, 2)
+
+[node name="North West Room Door" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.27801, -2.00272, 10.165)
+operation = 2
+size = Vector3(1, 2, 2)
+
+[node name="North West Joining Door" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, -7.43929, -2.00272, 5.83334)
+operation = 2
+size = Vector3(1, 2, 2)
+
+[node name="Player Room Joining Door" type="CSGBox3D" parent="North Side/North Hall"]
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, -7.43929, -2.00272, -12.1037)
+operation = 2
+size = Vector3(1, 2, 2)

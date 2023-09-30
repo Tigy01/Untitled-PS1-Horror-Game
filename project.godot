@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Untitled Ps 1 Horror Game"
-run/main_scene="res://Scenes/Levels/Opening scene Blockout.tscn"
+run/main_scene="res://Scenes/Levels/Blockout/Opening scene Blockout.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+run/max_fps=144
 config/icon="res://icon.svg"
 
 [display]
@@ -117,3 +118,7 @@ Interact={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[physics]
+
+3d/physics_engine="JoltPhysics3D"

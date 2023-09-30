@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://dmjigrr7kb5py"]
 
 [ext_resource type="Texture2D" uid="uid://xls1b28dyfv1" path="res://addons/kenney_prototype_textures/orange/texture_05.png" id="1_b1g7s"]
-[ext_resource type="Material" uid="uid://d36o6j7wogjh1" path="res://Assets/Blockout/Blockout.material" id="1_ojcre"]
+[ext_resource type="Material" uid="uid://d36o6j7wogjh1" path="res://Scenes/Levels/Blockout/Blockout.material" id="1_ojcre"]
 [ext_resource type="Texture2D" uid="uid://c1a3k8myokdw2" path="res://addons/kenney_prototype_textures/purple/texture_04.png" id="3_47jnx"]
-[ext_resource type="PackedScene" uid="uid://c1qbsglxiug5c" path="res://Scenes/PreFabs/Player Base.tscn" id="5_2lkt8"]
+[ext_resource type="PackedScene" uid="uid://cdmwfbi1tjou2" path="res://Scenes/PreFabs/Player/TPS - Player - Character.tscn" id="5_hjqw5"]
 [ext_resource type="Texture2D" uid="uid://vydmdwwlplwf" path="res://addons/kenney_prototype_textures/green/texture_01.png" id="5_j4ukc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_plw42"]
@@ -104,4 +104,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56612, 0.5, -4.08847)
 use_collision = true
 material = SubResource("StandardMaterial3D_lt84g")
 
-[node name="Player Base" parent="." instance=ExtResource("5_2lkt8")]
+[node name="TPS Player" parent="." instance=ExtResource("5_hjqw5")]
