@@ -14,6 +14,7 @@ var input:= Vector2.ZERO ## A [Vector3] representing the players input. The y va
 @onready var twist_pivot: Node3D = $TPSCameraHandler/TwistPivot ## A node that is used to rotate the Camera [i]horizontally[/i] around a point
 @onready var pitch_pivot: Node3D = $TPSCameraHandler/TwistPivot/PitchPivot ## A node that is used to rotate the Camera [i]vertically[/i] around a point
 @onready var visuals: Node3D = $Visuals
+@onready var interaction_body = $InteractionBody
 
 func _ready():
 	animation_handler.animation_ready(physics_handler.walking_speed, physics_handler.running_speed)

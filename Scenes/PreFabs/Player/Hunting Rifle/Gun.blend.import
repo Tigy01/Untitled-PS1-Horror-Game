@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://eqhmtfqbt7cy"
-path="res://.godot/imported/Gun.blend-3bc69e0c5aa6c0c11b64358cf52b42c0.scn"
+path="res://.godot/imported/Gun.blend-013f464d25a7cb2597cba1682f902bd6.scn"
 
 [deps]
 
-source_file="res://Assets/Hunting Rifle/Gun.blend"
-dest_files=["res://.godot/imported/Gun.blend-3bc69e0c5aa6c0c11b64358cf52b42c0.scn"]
+source_file="res://Scenes/PreFabs/Player/Hunting Rifle/Gun.blend"
+dest_files=["res://.godot/imported/Gun.blend-013f464d25a7cb2597cba1682f902bd6.scn"]
 
 [params]
 

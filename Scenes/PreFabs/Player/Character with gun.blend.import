@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://2khc8nvb3lml"
-path="res://.godot/imported/Character with gun.blend-f29b4302bfa11130cd648e237d8df8f0.scn"
+path="res://.godot/imported/Character with gun.blend-f23a54d644f8a19eb2f216bf7a2b7c9a.scn"
 
 [deps]
 
-source_file="res://Assets/Player/Character with gun.blend"
-dest_files=["res://.godot/imported/Character with gun.blend-f29b4302bfa11130cd648e237d8df8f0.scn"]
+source_file="res://Scenes/PreFabs/Player/Character with gun.blend"
+dest_files=["res://.godot/imported/Character with gun.blend-f23a54d644f8a19eb2f216bf7a2b7c9a.scn"]
 
 [params]
 

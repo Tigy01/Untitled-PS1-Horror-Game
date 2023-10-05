@@ -6,6 +6,8 @@ signal changed_weapon(weapon: String)##Allows Remote calls to the [AnimationHand
 var aiming:= false ## A boolean value that is used for checking if the user is aiming
 var view_centered:= false ## A boolean that outlines whether the camera is centered behind the player"s back when aiming
 
+
+
 func _input(event) -> void:
 	if (aiming and not view_centered):
 		return

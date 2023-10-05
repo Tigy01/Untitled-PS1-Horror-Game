@@ -1,0 +1,55 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://btlh85a50vmt4"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_gac3y"]
+expanded_output_ports = [0]
+source = 4
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_aojfj"]
+expanded_output_ports = [0]
+input_name = "fragcoord"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_sw1g3"]
+operator = 4
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_hspbh"]
+parameter_name = "pixel_size"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_a2cdn"]
+operator = 4
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded;
+
+uniform sampler2D depth_tex_frg_3 : hint_depth_texture;
+
+
+
+void fragment() {
+	vec4 n_out3p0;
+// Texture2D:3
+	{
+		float _depth = texture(depth_tex_frg_3, UV).r;
+		n_out3p0 = vec4(_depth, _depth, _depth, 1.0);
+	}
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+
+
+}
+"
+flags/unshaded = true
+nodes/fragment/0/position = Vector2(700, 140)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_gac3y")
+nodes/fragment/3/position = Vector2(-260, 380)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_aojfj")
+nodes/fragment/5/position = Vector2(-540, 600)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatOp_sw1g3")
+nodes/fragment/6/position = Vector2(-180, 700)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatParameter_hspbh")
+nodes/fragment/7/position = Vector2(-500, 780)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatOp_a2cdn")
+nodes/fragment/8/position = Vector2(-180, 580)
+nodes/fragment/connections = PackedInt32Array(7, 0, 6, 1, 5, 2, 6, 0, 7, 0, 8, 1, 5, 1, 8, 0, 3, 0, 0, 0)

@@ -18,8 +18,9 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
 [editor_plugins]
@@ -118,7 +119,3 @@ Interact={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
-
-[physics]
-
-3d/physics_engine="JoltPhysics3D"

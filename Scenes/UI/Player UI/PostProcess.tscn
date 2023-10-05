@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://ertys7lc5eic"]
+
+[ext_resource type="Shader" uid="uid://btlh85a50vmt4" path="res://Scenes/UI/Player UI/PostProcess.tres" id="1_2vrwl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a2x5m"]
+render_priority = 0
+shader = ExtResource("1_2vrwl")
+
+[sub_resource type="QuadMesh" id="QuadMesh_jcowa"]
+material = SubResource("ShaderMaterial_a2x5m")
+size = Vector2(2, 2)
+
+[node name="PostProcessing" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_jcowa")
